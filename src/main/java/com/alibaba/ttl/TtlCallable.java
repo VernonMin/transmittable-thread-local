@@ -6,6 +6,7 @@ import com.alibaba.ttl.spi.TtlEnhanced;
 import com.alibaba.ttl.spi.TtlWrapper;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
+import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -114,6 +115,7 @@ public final class TtlCallable<V> implements Callable<V>, TtlWrapper<Callable<V>
      * @return Wrapped {@link Callable}
      */
     @Nullable
+    @Contract("null -> null; !null -> !null")
     public static <T> TtlCallable<T> get(@Nullable Callable<T> callable) {
         return get(callable, false, false);
     }
@@ -129,6 +131,7 @@ public final class TtlCallable<V> implements Callable<V>, TtlWrapper<Callable<V>
      * @return Wrapped {@link Callable}
      */
     @Nullable
+    @Contract("null, _ -> null; !null, _ -> !null")
     public static <T> TtlCallable<T> get(@Nullable Callable<T> callable, boolean releaseTtlValueReferenceAfterCall) {
         return get(callable, releaseTtlValueReferenceAfterCall, false);
     }
@@ -144,6 +147,7 @@ public final class TtlCallable<V> implements Callable<V>, TtlWrapper<Callable<V>
      * @return Wrapped {@link Callable}
      */
     @Nullable
+    @Contract("null, _, _ -> null; !null, _, _ -> !null")
     public static <T> TtlCallable<T> get(@Nullable Callable<T> callable, boolean releaseTtlValueReferenceAfterCall, boolean idempotent) {
         if (null == callable) return null;
 
@@ -210,6 +214,7 @@ public final class TtlCallable<V> implements Callable<V>, TtlWrapper<Callable<V>
      * @since 2.10.2
      */
     @Nullable
+    @Contract("null -> null; !null -> !null")
     public static <T> Callable<T> unwrap(@Nullable Callable<T> callable) {
         if (!(callable instanceof TtlCallable)) return callable;
         else return ((TtlCallable<T>) callable).getCallable();

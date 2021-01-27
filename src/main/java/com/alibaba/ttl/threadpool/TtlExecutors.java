@@ -6,6 +6,7 @@ import com.alibaba.ttl.spi.TtlWrapper;
 import com.alibaba.ttl.threadpool.agent.TtlAgent;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
+import org.jetbrains.annotations.Contract;
 
 import java.util.concurrent.*;
 
@@ -56,6 +57,7 @@ public final class TtlExecutors {
      * @see com.alibaba.ttl.TtlCallable#get(Callable, boolean, boolean)
      */
     @Nullable
+    @Contract("null -> null; !null -> !null")
     public static Executor getTtlExecutor(@Nullable Executor executor) {
         if (TtlAgent.isTtlAgentLoaded() || null == executor || executor instanceof TtlEnhanced) {
             return executor;
@@ -81,6 +83,7 @@ public final class TtlExecutors {
      * @see com.alibaba.ttl.TtlCallable#get(Callable, boolean, boolean)
      */
     @Nullable
+    @Contract("null -> null; !null -> !null")
     public static ExecutorService getTtlExecutorService(@Nullable ExecutorService executorService) {
         if (TtlAgent.isTtlAgentLoaded() || executorService == null || executorService instanceof TtlEnhanced) {
             return executorService;
@@ -107,6 +110,7 @@ public final class TtlExecutors {
      * @see com.alibaba.ttl.TtlCallable#get(Callable, boolean, boolean)
      */
     @Nullable
+    @Contract("null -> null; !null -> !null")
     public static ScheduledExecutorService getTtlScheduledExecutorService(@Nullable ScheduledExecutorService scheduledExecutorService) {
         if (TtlAgent.isTtlAgentLoaded() || scheduledExecutorService == null || scheduledExecutorService instanceof TtlEnhanced) {
             return scheduledExecutorService;
@@ -151,6 +155,7 @@ public final class TtlExecutors {
      * @since 2.8.0
      */
     @Nullable
+    @Contract("null -> null; !null -> !null")
     @SuppressWarnings("unchecked")
     public static <T extends Executor> T unwrap(@Nullable T executor) {
         if (!isTtlWrapper(executor)) return executor;
@@ -166,6 +171,7 @@ public final class TtlExecutors {
      * @since 2.10.0
      */
     @Nullable
+    @Contract("null -> null; !null -> !null")
     public static ThreadFactory getDisableInheritableThreadFactory(@Nullable ThreadFactory threadFactory) {
         if (threadFactory == null || isDisableInheritableThreadFactory(threadFactory)) return threadFactory;
 
@@ -201,6 +207,7 @@ public final class TtlExecutors {
      * @since 2.10.0
      */
     @Nullable
+    @Contract("null -> null; !null -> !null")
     public static ThreadFactory unwrap(@Nullable ThreadFactory threadFactory) {
         if (!isDisableInheritableThreadFactory(threadFactory)) return threadFactory;
 

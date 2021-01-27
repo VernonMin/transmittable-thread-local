@@ -20,7 +20,7 @@ fun main() {
     // Runnable / TtlRunnable
     /////////////////////////////////////
     val task = Runnable { println("[child thread] get ${context.get()} in Runnable") }
-    val ttlRunnable = TtlRunnable.get(task)!!
+    val ttlRunnable = TtlRunnable.get(task)
 
     executorService.submit(ttlRunnable).get()
 
